@@ -1,29 +1,15 @@
 class Solution {
 public:
     vector<int> sortByBits(vector<int>& arr) {
-      unordered_map<int,int>m;
-      vector<int>res;
-      for(int i:arr){
-        m[i]=__builtin_popcount(i);
-      }
-      int min=INT_MAX;
-      int max=INT_MIN;
-      for(auto i:m){
-         if(i.second<min){
-            min=i.second;
-         }
-         if(i.second>max){
-            max=i.second;
-         }
-      }
-     
-      for(auto i:m){
-        for(int j=min;j<=max;j++){
-            if(i.second==j){
-                res.push_back(i.first);
-            }
+        vector<pair<int,int>>v;
+        vector<int>res;
+        for(int num:arr){
+            v.push_back({__builtin_popcount(num),num});
         }
-      }
-      return res;
+        sort(v.begin(),v.end());
+        for(auto &p:v){
+            res.push_back(p.second);
+        }
+        return res;
     }
 };
